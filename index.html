@@ -54,7 +54,16 @@
         </table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           
-          
+       <script type="text/javascript">
+          function hideshow(which){
+          if (!document.getElementById)
+              return
+          if (which.style.display=="block")
+              which.style.display="none"
+          else
+              which.style.display="block"
+          }
+      </script>
 
        <tr onmouseout="mine_stop()" onmouseover="mine_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">

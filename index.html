@@ -95,6 +95,55 @@
           </tr>
        </tbody></table>
         
+        
+       <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+       <tr onmouseout="ATF_TBIOM_stop()" onmouseover="ATF_TBIOM_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='ATF_TBIOM_image'>
+                <img src='Data/ATFaceGAN_TBIOM_1.png' width="160"></div>
+              <img src='Data/ATFaceGAN_TBIOM_2.png' width="160">
+            </div>
+            <script type="text/javascript">
+              function ATF_TBIOM_start() {
+                document.getElementById('ATF_TBIOM_image').style.opacity = "1";
+              }
+
+              function ATF_TBIOM_stop() {
+                document.getElementById('ATF_TBIOM_image').style.opacity = "0";
+              }
+              bias_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <a href="https://ieeexplore.ieee.org/document/9351531">
+              <papertitle>Semi-Supervised Landmark-Guided Restoration of Atmospheric Turbulent Images</papertitle>
+            </a>
+            <br>
+            <strong>Chun Pong Lau</strong>, 
+            Carlos Castillo, 
+            Rama Chellappa
+            <br>
+            <em>IEEE Transactions on Biometrics, Behavior, and Identity Science <b>(TBIOM)</b></em>, 2021
+            <br>
+            <a href="https://ieeexplore.ieee.org/document/9351531">[PDF]</a> /
+<!--             <a href="javascript:hideshow(document.getElementById('ATFaceGAN_abstract'))"> [Abstract] </a> / -->
+            <a href="javascript:hideshow(document.getElementById('ATF_TBIOM'))"> [Bibtex] </a> 
+            
+          </td>
+        </tr>
+        </tbody></table> 
+        
+        <pre><p id="ATF_TBIOM" style="font:18px; display:none">
+        @article{lau2021atfacegan,
+          title={ATFaceGAN: Single Face Semantic Aware Image Restoration and Recognition from Atmospheric Turbulence},
+          author={Lau, Chun Pong and Castillo, Carlos and Chellappa, Rama},
+          journal={IEEE Transactions on Biometrics, Behavior, and Identity Science},
+          year={2021},
+          publisher={IEEE}
+        }
+        </p></pre>
+        
        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
        <tr onmouseout="atkey_stop()" onmouseover="atkey_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">

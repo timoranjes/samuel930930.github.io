@@ -46,13 +46,13 @@
             </td>
           </tr>
         </table>
-<!--         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <tr>
             <td style="padding:0px;width:100%;vertical-align:middle">
-              <h3 style="color:red;text-align:center">Looking for Research Intern in Summer 2021!</h3>
+              <h3 style="color:red;text-align:center">I am on the job market this year for academia positions.</h3>
             </td>
           </tr>
-        </table> -->
+        </table>
         <script type="text/javascript">
           function hideshow(which){
           if (!document.getElementById)
@@ -70,7 +70,9 @@
                   <heading>News</heading>
                   <hr style="margin-top:5px;margin-bottom:0px;" />
                   <!-- <br /> -->
-              
+              <ul>
+                <li>One paper accepted by CVPR 2022</li>
+              </ul>
               <ul>
                 <li>One paper accepted by IEEE TBIOM</li>
               </ul>
@@ -95,7 +97,56 @@
             </td>
           </tr>
        </tbody></table>
+       
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+       <tr onmouseout="ATF_TBIOM_stop()" onmouseover="ATF_TBIOM_start()">
+          <td style="padding:20px;width:25%;vertical-align:middle">
+            <div class="one">
+              <div class="two" id='ATF_TBIOM_image'>
+                <img src='Data/ATFaceGAN_TBIOM_1.png' width="160"></div>
+              <img src='Data/ATFaceGAN_TBIOM_2.png' width="160">
+            </div>
+            <script type="text/javascript">
+              function ATF_TBIOM_start() {
+                document.getElementById('ATF_TBIOM_image').style.opacity = "1";
+              }
+
+              function ATF_TBIOM_stop() {
+                document.getElementById('ATF_TBIOM_image').style.opacity = "0";
+              }
+              bias_stop()
+            </script>
+          </td>
+          <td style="padding:20px;width:75%;vertical-align:middle">
+            <a href="https://arxiv.org/abs/2112.04532">
+              <papertitle>Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks with Robust Patch Detection</papertitle>
+            </a>
+            <br>
+            Jiang Liu,
+            Alexander Levine,
+            <strong>Chun Pong Lau</strong>, 
+            Rama Chellappa,
+            Soheil Feizi
+            <br>
+            <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition <b>(CVPR)</b></em>, 2022
+            <br>
+            <a href="https://arxiv.org/abs/2112.04532">[PDF]</a> /
+<!--             <a href="javascript:hideshow(document.getElementById('ATFaceGAN_abstract'))"> [Abstract] </a> / -->
+            <a href="javascript:hideshow(document.getElementById('SAC'))"> [Bibtex] </a> 
+            
+          </td>
+        </tr>
+        </tbody></table> 
         
+        <pre><p id="SAC" style="font:18px; display:none">
+        @article{jiang2022SAC,
+          title={Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks with Robust Patch Detection},
+          author={Liu, Jiang and Levine, Alexander and Lau, Chun Pong and Chellappa, Rama and Feizi, Soheil},
+          booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+          year={2022}
+        }
+        </p></pre>
+       
         
        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
        <tr onmouseout="ATF_TBIOM_stop()" onmouseover="ATF_TBIOM_start()">

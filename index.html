@@ -99,20 +99,20 @@
        </tbody></table>
        
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-       <tr onmouseout="ATF_TBIOM_stop()" onmouseover="ATF_TBIOM_start()">
+       <tr onmouseout="SAC_stop()" onmouseover="SAC_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
-              <div class="two" id='ATF_TBIOM_image'>
-                <img src='Data/ATFaceGAN_TBIOM_1.png' width="160"></div>
-              <img src='Data/ATFaceGAN_TBIOM_2.png' width="160">
+              <div class="two" id='SAC_image'>
+                <img src='Data/sac_teaser.png' width="160"></div>
+              <img src='Data/sac_teaser.png' width="160">
             </div>
             <script type="text/javascript">
-              function ATF_TBIOM_start() {
-                document.getElementById('ATF_TBIOM_image').style.opacity = "1";
+              function SAC_start() {
+                document.getElementById('SAC_image').style.opacity = "1";
               }
 
-              function ATF_TBIOM_stop() {
-                document.getElementById('ATF_TBIOM_image').style.opacity = "0";
+              function SAC_stop() {
+                document.getElementById('SAC_image').style.opacity = "0";
               }
               bias_stop()
             </script>

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
+  <style>/* /* mobile-toggle-fix-20260501231141 */ */
     :root {
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'Inter', system-ui, sans-serif;
@@ -383,8 +383,8 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .theme-toggle-mobile { display: flex; }
-      .theme-toggle { display: none; }
+      .theme-toggle-mobile { display: flex !important; }
+      .theme-toggle { display: none !important; }
       .layout { grid-template-columns: 1fr; }
       .sidebar {
         position: relative;

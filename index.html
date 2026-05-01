@@ -14,14 +14,14 @@
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-heading: 'Playfair Display', Georgia, serif;
 
-      /* Light theme (default) */
+      /* Light theme — CityU brand colors */
       --bg-primary: #ffffff;
-      --bg-secondary: #f8f9fb;
+      --bg-secondary: #f2f2f2;
       --bg-card: #ffffff;
-      --bg-card-hover: #f8f9fb;
-      --bg-hero: #fafbfd;
+      --bg-card-hover: #f8f9fa;
+      --bg-hero: linear-gradient(135deg, #f8f0f3 0%, #ffffff 50%, #f0f7ff 100%);
       --bg-code: #f1f3f5;
-      --text-primary: #1a1a2e;
+      --text-primary: #2e2e2e;
       --text-secondary: #4a4a6a;
       --text-tertiary: #7a7a9a;
       --text-inverse: #ffffff;
@@ -30,16 +30,19 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
       --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
       --shadow-lg: 0 8px 32px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
-      --accent: #3b5998;
-      --accent-light: #eef1f8;
-      --accent-hover: #2d4373;
-      --link-color: #3b5998;
-      --link-hover: #2d4373;
+      --accent: #bf165e;
+      --accent-light: #fdf2f6;
+      --accent-hover: #9f0d43;
+      --link-color: #bf165e;
+      --link-hover: #9f0d43;
       --scrollbar-track: #f1f1f1;
       --scrollbar-thumb: #c1c1c1;
       --badge-text: #ffffff;
-      --news-bullet: #3b5998;
+      --news-bullet: #bf165e;
       --section-divider: linear-gradient(90deg, transparent, var(--border-color), transparent);
+      --cityu-blue: #0072bc;
+      --cityu-blue-light: #ecf7ff;
+      --cityu-dark: #343a40;
     }
 
     [data-theme="dark"] {
@@ -47,7 +50,7 @@
       --bg-secondary: #161625;
       --bg-card: #1a1a2e;
       --bg-card-hover: #22223a;
-      --bg-hero: #12121f;
+      --bg-hero: linear-gradient(135deg, #1a0f18 0%, #0f0f1a 50%, #0f1a2e 100%);
       --bg-code: #1e1e32;
       --text-primary: #e8e8f0;
       --text-secondary: #b0b0cc;
@@ -58,14 +61,17 @@
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.3);
       --shadow-md: 0 4px 16px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
       --shadow-lg: 0 8px 32px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
-      --accent: #6b8dd6;
-      --accent-light: #1e2545;
-      --accent-hover: #8aa8e8;
-      --link-color: #6b8dd6;
-      --link-hover: #8aa8e8;
+      --accent: #e8457a;
+      --accent-light: #2a1520;
+      --accent-hover: #f06292;
+      --link-color: #e8457a;
+      --link-hover: #f06292;
       --scrollbar-track: #1a1a2e;
       --scrollbar-thumb: #3a3a5a;
-      --news-bullet: #6b8dd6;
+      --news-bullet: #e8457a;
+      --cityu-blue: #3399ff;
+      --cityu-blue-light: #0a1a2e;
+      --cityu-dark: #e8e8f0;
     }
 
     /* ========== Reset & Base ========== */
@@ -105,6 +111,18 @@
     ::-webkit-scrollbar-thumb {
       background: var(--scrollbar-thumb);
       border-radius: 4px;
+    }
+
+    /* ========== Scroll Progress Bar ========== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--cityu-blue));
+      z-index: 1001;
+      width: 0%;
+      transition: width 0.1s ease;
     }
 
     a {
@@ -155,6 +173,31 @@
       font-weight: 600;
       color: var(--text-primary);
       letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--cityu-blue));
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .brand-text {
+      transition: color 0.2s ease;
+    }
+
+    .navbar-brand:hover .brand-text {
+      color: var(--accent);
     }
 
     .navbar-links {
@@ -257,6 +300,75 @@
       background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
       opacity: 0.6;
       pointer-events: none;
+      /* CityU magenta accent glow */
+    }
+
+    .hero-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.3;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 300px 300px at 80% 20%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 300px 300px at 80% 20%, black, transparent);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--cityu-blue-light, #ecf7ff) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ========== Research Stats ========== */
+    .stats-section {
+      padding: 48px 0;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      transition: all 0.25s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+      font-weight: 500;
     }
 
     .hero-inner {
@@ -293,6 +405,7 @@
       font-weight: 500;
       color: var(--accent);
       margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .hero-bio {
@@ -315,15 +428,20 @@
     .interest-tag {
       font-size: 0.8rem;
       font-weight: 500;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
       background: var(--accent-light);
       color: var(--accent);
       border: 1px solid transparent;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      cursor: default;
     }
     .interest-tag:hover {
       border-color: var(--accent);
+      background: var(--accent);
+      color: var(--text-inverse);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(191, 22, 94, 0.2);
     }
 
     .hero-links {
@@ -371,10 +489,28 @@
       box-shadow: var(--shadow-lg);
       border: 4px solid var(--bg-card);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
     .hero-photo:hover {
-      transform: scale(1.02);
-      box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-light);
+      transform: scale(1.03) rotate(-1deg);
+      box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-light), 0 0 20px rgba(191, 22, 94, 0.15);
+    }
+
+    .hero-photo-wrapper {
+      position: relative;
+    }
+
+    .hero-photo-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--cityu-blue));
+      opacity: 0.15;
+      z-index: -1;
     }
 
     /* ========== Section Styles ========== */
@@ -675,11 +811,67 @@
 
     /* ========== Footer ========== */
     .footer {
-      padding: 40px 0;
-      text-align: center;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-tertiary);
+      padding: 48px 0 32px;
+      background: var(--cityu-blue-light, #ecf7ff);
+      border-top: 3px solid var(--accent);
+      color: var(--text-secondary);
       font-size: 0.85rem;
+      transition: background 0.3s ease;
+    }
+
+    [data-theme="dark"] .footer {
+      background: var(--cityu-blue-light, #0a1a2e);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .footer-affiliation {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
     }
 
     .back-to-top {
@@ -742,6 +934,13 @@
       .hero-photo-wrapper {
         order: -1;
       }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-links {
+        justify-content: center;
+      }
       .hero-photo {
         width: 200px;
         height: 200px;
@@ -764,6 +963,10 @@
       }
       .pub-image-wrapper {
         max-width: 320px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
     }
 
@@ -811,15 +1014,28 @@
         width: 40px;
         height: 40px;
       }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .stat-number {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <!-- ========== Navigation ========== -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
-      <a href="#" class="navbar-brand">S.C.P. Lau</a>
+      <a href="#" class="navbar-brand">
+        <span class="brand-icon">S</span>
+        <span class="brand-text">S.C.P. Lau</span>
+      </a>
       <ul class="navbar-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#news">News</a></li>
@@ -888,6 +1104,31 @@
         </div>
         <div class="hero-photo-wrapper fade-in fade-in-delay-1">
           <img src="Data/cplau_square_ap.jpeg" alt="Samuel Chun Pong Lau" class="hero-photo" onerror="this.src='https://ui-avatars.com/api/?name=SCPL&size=260&background=3b5998&color=fff&font-size=0.4&bold=true&format=svg'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== Research Stats ========== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-in">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Selected Publications</div>
+        </div>
+        <div class="stat-item fade-in fade-in-delay-1">
+          <div class="stat-number">CVPR</div>
+          <div class="stat-label">Top-Tier Venues</div>
+        </div>
+        <div class="stat-item fade-in fade-in-delay-2">
+          <div class="stat-number">JHU</div>
+          <div class="stat-label">Ph.D. Institution</div>
+        </div>
+        <div class="stat-item fade-in fade-in-delay-3">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Research Areas</div>
         </div>
       </div>
     </div>
@@ -1213,7 +1454,21 @@
 <!-- ========== Footer ========== -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2024 Samuel Chun Pong Lau. All rights reserved.</p>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-name">Samuel Chun Pong Lau</span>
+          <span class="footer-affiliation">School of Data Science, City University of Hong Kong</span>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:cplau27@cityu.edu.hk">Email</a>
+          <a href="https://github.com/samuel930930" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://scholar.google.com/citations?user=UYMV3qMAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+          <a href="https://www.linkedin.com/in/chun-pong-lau-a08619136/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Samuel Chun Pong Lau. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
@@ -1299,6 +1554,15 @@
       btn.classList.toggle('active');
       btn.setAttribute('aria-expanded', !isOpen);
     }
+
+    // ===== Scroll Progress Bar =====
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = scrollPercent + '%';
+    }, { passive: true });
 
     // ===== Navbar scroll effect =====
     const navbar = document.querySelector('.navbar');

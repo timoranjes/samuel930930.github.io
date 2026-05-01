@@ -7,322 +7,344 @@
   <meta name="description" content="Assistant Professor, School of Data Science, City University of Hong Kong">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --font: 'Geist', system-ui, -apple-system, sans-serif;
-      --mono: 'Geist Mono', ui-monospace, monospace;
-      --bg: #fafafa;
+      --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --bg: #fcfbf9;
+      --surface: #f3f1ec;
       --card: #ffffff;
-      --text: #171717;
-      --text2: #4d4d4d;
-      --text3: #666666;
-      --accent: #0a72ef;
-      --accent2: #de1d8d;
-      --accent3: #ff5b4f;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-      --radius: 20px;
-      --gap: 16px;
-      --max: 1200px;
-      --dock-bg: rgba(255,255,255,0.85);
-      --dock-border: rgba(0,0,0,0.08);
-      --dock-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      --text: #1a1a1a;
+      --text2: #4a4a4a;
+      --text3: #7a7a7a;
+      --accent: #9b2226;
+      --accent-light: rgba(155,34,38,0.08);
+      --border: rgba(0,0,0,0.1);
+      --border-light: rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+      --max: 1080px;
+      --sidebar: 320px;
     }
     [data-theme="dark"] {
-      --bg: #0a0a0a;
-      --card: #171717;
-      --text: #ededed;
-      --text2: #a1a1a1;
-      --text3: #666666;
-      --accent: #3b93f8;
-      --accent2: #f472b6;
-      --accent3: #fb7185;
+      --bg: #111110;
+      --surface: #1a1918;
+      --card: #1f1e1c;
+      --text: #e8e6e1;
+      --text2: #a8a6a1;
+      --text3: #6a6862;
+      --accent: #d4757a;
+      --accent-light: rgba(212,117,122,0.1);
       --border: rgba(255,255,255,0.1);
-      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
-      --dock-bg: rgba(23,23,23,0.9);
-      --dock-border: rgba(255,255,255,0.1);
-      --dock-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      --border-light: rgba(255,255,255,0.05);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 2px 8px rgba(0,0,0,0.3);
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font);
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 100px;
       font-feature-settings: "liga";
     }
     ::selection { background: var(--accent); color: #fff; }
-    a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
-    a:hover { opacity: 0.8; }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--text); }
     img { max-width: 100%; display: block; }
 
-    /* Scroll Progress */
-    .progress { position:fixed; top:0; left:0; height:2px; background:var(--accent); z-index:999; width:0%; transition:width .1s; }
-
-    /* Bento Grid */
-    .bento {
+    /* Layout */
+    .layout {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--gap);
+      grid-template-columns: var(--sidebar) 1fr;
       max-width: var(--max);
       margin: 0 auto;
-      padding: 32px 24px;
+      min-height: 100vh;
+      gap: 0;
     }
 
-    /* Card */
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      transition: transform .3s ease, box-shadow .3s ease;
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 48px 32px;
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar::-webkit-scrollbar { width: 0; }
+
+    .photo-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       overflow: hidden;
+      margin-bottom: 24px;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-    /* Card sizes */
-    .c-hero { grid-column: span 8; }
-    .c-photo { grid-column: span 4; }
-    .c-stat { grid-column: span 3; }
-    .c-interests { grid-column: span 4; }
-    .c-news { grid-column: span 4; }
-    .c-links { grid-column: span 4; }
-    .c-pub { grid-column: span 6; }
-    .c-footer { grid-column: span 12; }
-
-    /* Name */
-    .name {
-      font-size: 48px;
+    .s-name {
+      font-family: var(--serif);
+      font-size: 22px;
       font-weight: 600;
-      line-height: 1.0;
-      letter-spacing: -2.4px;
-      margin-bottom: 4px;
+      line-height: 1.2;
+      margin-bottom: 2px;
+      letter-spacing: -0.3px;
     }
-    .chinese {
-      font-size: 18px;
+    .s-chinese {
+      font-size: 14px;
       color: var(--text3);
-      font-weight: 400;
-      letter-spacing: 0.05em;
       margin-bottom: 12px;
     }
-    .title {
-      font-size: 15px;
-      font-weight: 500;
+    .s-title {
+      font-size: 13px;
       color: var(--accent);
-      margin-bottom: 16px;
+      font-weight: 500;
       line-height: 1.5;
+      margin-bottom: 20px;
     }
-    .bio {
-      font-size: 15px;
+
+    .s-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 10px;
+      margin-top: 24px;
+    }
+    .s-section-label:first-of-type { margin-top: 0; }
+
+    .s-bio {
+      font-size: 13px;
       color: var(--text2);
       line-height: 1.7;
     }
+    .s-bio a { color: var(--accent); }
 
-    /* Photo */
-    .photo-wrap {
+    .s-interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .s-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--accent-light);
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+
+    .s-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .s-link {
       display: flex;
       align-items: center;
-      justify-content: center;
-      height: 100%;
-      min-height: 280px;
-    }
-    .photo {
-      width: 100%;
-      max-width: 240px;
-      border-radius: 16px;
-      object-fit: cover;
-      aspect-ratio: 1;
-    }
-
-    /* Stat */
-    .stat-num {
-      font-size: 32px;
-      font-weight: 600;
-      letter-spacing: -1.28px;
-      color: var(--text);
-    }
-    .stat-label {
+      gap: 8px;
       font-size: 13px;
-      color: var(--text3);
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    /* Interest tags */
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      font-size: 13px;
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      background: var(--bg);
       color: var(--text2);
-      box-shadow: var(--border) 0px 0px 0px 1px;
-      transition: all .2s;
-      cursor: default;
+      transition: color 0.2s;
     }
-    .tag:hover {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: none;
-      transform: scale(1.05);
+    .s-link:hover { color: var(--accent); }
+    .s-link svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.5; }
+    .s-link:hover svg { opacity: 1; }
+
+    .sidebar-spacer { flex: 1; }
+
+    .theme-toggle {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text3);
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      transition: all 0.2s;
+      font-family: var(--sans);
+      width: fit-content;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle svg { width: 14px; height: 14px; }
+
+    /* Main */
+    .main {
+      padding: 48px 48px 80px;
     }
 
-    /* News timeline */
-    .timeline { position: relative; padding-left: 20px; }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 4px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: var(--border);
+    /* News */
+    .news-section {
+      margin-bottom: 56px;
     }
-    .tl-item {
-      position: relative;
-      margin-bottom: 14px;
-      font-size: 13px;
+    .section-heading {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    [data-theme="dark"] .section-heading { border-bottom-color: var(--text3); }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .news-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px;
       color: var(--text2);
       line-height: 1.5;
     }
-    .tl-item:last-child { margin-bottom: 0; }
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: -20px;
-      top: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    .tl-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent);
-      font-family: var(--mono);
-      margin-right: 6px;
-    }
-    .tl-venue { font-weight: 600; color: var(--text); }
-
-    /* Links */
-    .link-list { display: flex; flex-direction: column; gap: 8px; }
-    .link-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .news-item:last-child { border-bottom: none; }
+    .news-year {
+      font-family: var(--serif);
       font-size: 14px;
-      font-weight: 500;
-      color: var(--text2);
-      padding: 8px 12px;
-      border-radius: 10px;
-      background: var(--bg);
-      transition: all .2s;
+      font-weight: 600;
+      color: var(--text3);
+      font-style: italic;
     }
-    .link-item:hover {
-      background: var(--accent);
-      color: #fff;
-      transform: translateX(4px);
-    }
-    .link-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; }
-    .link-item:hover svg { opacity: 1; }
+    .news-venue { font-weight: 600; color: var(--text); }
 
-    /* Publication card */
-    .pub-card {
+    /* Publications */
+    .pubs-section { margin-bottom: 56px; }
+
+    .pub-item {
       display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 20px;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-light);
       align-items: start;
     }
-    .pub-img {
-      width: 100%;
-      border-radius: 12px;
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-img-wrap {
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
       aspect-ratio: 4/3;
+    }
+    .pub-img-wrap img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
-    .pub-venue {
-      font-size: 11px;
+
+    .pub-content {}
+    .pub-venue-tag {
+      font-size: 10px;
       font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 9999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
       color: #fff;
       display: inline-block;
       margin-bottom: 6px;
-      font-family: var(--mono);
+      font-family: var(--sans);
     }
-    .pub-title {
-      font-size: 16px;
+    .pub-award-tag {
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: -0.32px;
-      line-height: 1.4;
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: #fbbf24;
+      color: #78350f;
+      display: inline-block;
+      margin-bottom: 6px;
+      margin-left: 4px;
+    }
+    .pub-equal-note {
+      font-size: 11px;
+      color: var(--text3);
+      font-style: italic;
+      margin-bottom: 2px;
+    }
+    .pub-title-text {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.2px;
       margin-bottom: 6px;
       color: var(--text);
     }
-    .pub-authors {
+    .pub-authors-text {
       font-size: 13px;
       color: var(--text3);
+      line-height: 1.5;
       margin-bottom: 10px;
     }
-    .pub-authors strong { color: var(--accent); font-weight: 600; }
-    .pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pub-btn {
-      font-size: 12px;
+    .pub-authors-text strong { color: var(--accent); font-weight: 600; }
+    .pub-actions-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pub-action-btn {
+      font-size: 11px;
       font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 6px;
-      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--surface);
       color: var(--text2);
-      box-shadow: var(--border) 0px 0px 0px 1px;
-      transition: all .2s;
+      border: 1px solid var(--border-light);
       cursor: pointer;
-      border: none;
+      transition: all 0.2s;
+      font-family: var(--sans);
       display: inline-flex;
       align-items: center;
       gap: 4px;
     }
-    .pub-btn:hover { background: var(--accent); color: #fff; box-shadow: none; }
-    .pub-btn svg { width: 12px; height: 12px; }
+    .pub-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pub-action-btn svg { width: 12px; height: 12px; }
+
     .bibtex-block {
       max-height: 0;
       overflow: hidden;
-      transition: max-height .3s ease;
+      transition: max-height 0.3s ease, margin 0.3s ease;
     }
     .bibtex-block.open { max-height: 300px; margin-top: 12px; }
     .bibtex-code {
-      font-family: var(--mono);
+      font-family: 'SFMono-Regular', Consolas, monospace;
       font-size: 11px;
       line-height: 1.6;
       padding: 12px 14px;
-      border-radius: 8px;
-      background: var(--bg);
+      border-radius: 4px;
+      background: var(--surface);
       color: var(--text3);
       white-space: pre-wrap;
       word-break: break-word;
       overflow-x: auto;
-      box-shadow: var(--border) 0px 0px 0px 1px;
-    }
-    .pub-equal {
-      font-size: 11px;
-      color: var(--text3);
-      font-style: italic;
-      margin-bottom: 4px;
-    }
-    .pub-award {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 9999px;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #78350f;
-      display: inline-block;
-      margin-bottom: 6px;
+      border: 1px solid var(--border-light);
     }
 
     /* Venue colors */
@@ -336,357 +358,313 @@
     .v-tip { background: #7c3aed; }
 
     /* Footer */
-    .footer-inner {
+    .footer {
+      padding: 32px 0 0;
+      border-top: 1px solid var(--border-light);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
     }
-    .footer-text { font-size: 13px; color: var(--text3); }
+    .footer-text { font-size: 12px; color: var(--text3); }
     .footer-links { display: flex; gap: 16px; }
-    .footer-links a { font-size: 13px; color: var(--text3); }
+    .footer-links a { font-size: 12px; color: var(--text3); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Dock */
-    .dock {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--dock-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid var(--dock-border);
-      border-radius: 16px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: var(--dock-shadow);
-      z-index: 100;
-    }
-    .dock-item {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text3);
-      transition: all .2s;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-    }
-    .dock-item:hover {
-      background: var(--bg);
-      color: var(--accent);
-      transform: translateY(-4px) scale(1.1);
-    }
-    .dock-item svg { width: 18px; height: 18px; }
-    .dock-divider { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
-
-    /* Fade in */
-    .fade { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
-    .fade.visible { opacity: 1; transform: translateY(0); }
-
-    /* Back to top */
-    .btt {
-      position: fixed;
-      bottom: 80px;
-      right: 24px;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      color: var(--text3);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Animations */
+    .fade-in {
       opacity: 0;
-      visibility: hidden;
-      transition: all .3s;
-      z-index: 90;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .btt.visible { opacity: 1; visibility: visible; }
-    .btt:hover { background: var(--accent); color: #fff; }
-    .btt svg { width: 16px; height: 16px; }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Responsive */
-    @media (max-width: 900px) {
-      .c-hero, .c-photo, .c-stat, .c-interests, .c-news, .c-links, .c-pub, .c-footer { grid-column: span 6; }
-      .c-photo { grid-column: span 6; }
-      .c-footer { grid-column: span 6; }
-      .name { font-size: 36px; letter-spacing: -1.28px; }
-      .pub-card { grid-template-columns: 120px 1fr; gap: 14px; }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        padding: 32px 24px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+      }
+      .photo-container { width: 80px; height: 80px; margin-bottom: 0; }
+      .sidebar-spacer { display: none; }
+      .s-section-label { margin-top: 12px; width: 100%; }
+      .s-bio-section { width: 100%; }
+      .theme-toggle { margin-top: 12px; }
+      .main { padding: 32px 24px 64px; }
+      .pub-item { grid-template-columns: 100px 1fr; gap: 16px; }
+      .section-heading { font-size: 22px; }
+      .hero-title { font-size: 28px; letter-spacing: -0.96px; }
     }
-    @media (max-width: 600px) {
-      .bento { padding: 16px 12px; gap: 12px; }
-      .c-hero, .c-photo, .c-stat, .c-interests, .c-news, .c-links, .c-pub, .c-footer { grid-column: span 12; }
-      .card { padding: 20px; border-radius: 16px; }
-      .name { font-size: 28px; letter-spacing: -0.96px; }
-      .photo-wrap { min-height: 200px; }
-      .pub-card { grid-template-columns: 1fr; }
-      .pub-img { max-width: 200px; }
-      .dock { bottom: 12px; padding: 6px 10px; border-radius: 12px; }
-      .dock-item { width: 36px; height: 36px; }
-      .btt { bottom: 70px; right: 16px; }
+    @media (max-width: 560px) {
+      .sidebar { padding: 24px 16px; }
+      .main { padding: 24px 16px 48px; }
+      .pub-item { grid-template-columns: 1fr; }
+      .pub-img-wrap { max-width: 200px; }
+      .news-item { grid-template-columns: 40px 1fr; gap: 10px; }
+      .hero-title { font-size: 24px; letter-spacing: -0.72px; }
+      .section-heading { font-size: 20px; }
+      .tag { padding: 5px 12px; font-size: 12px; }
+      .action-btn { min-height: 44px; min-width: 44px; }
+    }
+    @media (max-width: 400px) {
+      .sidebar { padding: 20px 12px; }
+      .main { padding: 20px 12px 40px; }
+      .hero-title { font-size: 20px; letter-spacing: -0.5px; }
+      .section-heading { font-size: 18px; }
+      .pub-title-text { font-size: 15px; }
+      .pub-authors-text { font-size: 12px; }
+      .pub-action-btn { font-size: 11px; padding: 8px 12px; }
+      .news-item { font-size: 13px; }
     }
   </style>
 </head>
-<body>
+<body id="top">
 
-<div class="progress" id="progress"></div>
+<div class="layout">
 
-<div class="bento">
-
-  <!-- Hero -->
-  <div class="card c-hero fade">
-    <h1 class="name">Samuel Chun Pong Lau</h1>
-    <p class="chinese">劉俊邦</p>
-    <p class="title">Assistant Professor, School of Data Science<br>City University of Hong Kong</p>
-    <p class="bio">I received my Ph.D. from <a href="https://www.jhu.edu/" target="_blank">Johns Hopkins University</a> in 2021, under the supervision of <a href="https://engineering.jhu.edu/ece/faculty/rama-chellappa/" target="_blank">Prof. Rama Chellappa</a>. I obtained my B.Sc. and M.Phil. from CUHK, and M.S. from the University of Maryland. I was a postdoctoral fellow at MINDS, JHU. My research focuses on developing robust and reliable computer vision algorithms.</p>
-  </div>
-
-  <!-- Photo -->
-  <div class="card c-photo fade">
-    <div class="photo-wrap">
-      <img src="Data/cplau_square_ap.jpeg" alt="Samuel Chun Pong Lau" class="photo" onerror="this.src='https://ui-avatars.com/api/?name=SCL&size=240&background=0a72ef&color=fff&font-size=0.4'">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="photo-container">
+      <img src="Data/cplau_square_ap.jpeg" alt="Samuel Chun Pong Lau" onerror="this.src='https://ui-avatars.com/api/?name=SCL&size=240&background=9b2226&color=fff&font-size=0.4'">
     </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="card c-stat fade"><div class="stat-num">8</div><div class="stat-label">Publications</div></div>
-  <div class="card c-stat fade"><div class="stat-num">CVPR</div><div class="stat-label">Top Venues</div></div>
-  <div class="card c-stat fade"><div class="stat-num">JHU</div><div class="stat-label">Ph.D. Institution</div></div>
-  <div class="card c-stat fade"><div class="stat-num">4</div><div class="stat-label">Research Areas</div></div>
-
-  <!-- Research Interests -->
-  <div class="card c-interests fade">
-    <p style="font-size:13px;font-weight:600;color:var(--text3);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.05em;">Research Interests</p>
-    <div class="tags">
-      <span class="tag">Image Restoration</span>
-      <span class="tag">Adversarial Robustness</span>
-      <span class="tag">Biometrics at Long Distances</span>
-      <span class="tag">Generative AI</span>
+    <div>
+      <h1 class="s-name">Samuel Chun Pong Lau</h1>
+      <p class="s-chinese">劉俊邦</p>
+      <p class="s-title">Assistant Professor<br>School of Data Science<br>City University of Hong Kong</p>
     </div>
-  </div>
 
-  <!-- News -->
-  <div class="card c-news fade">
-    <p style="font-size:13px;font-weight:600;color:var(--text3);margin-bottom:14px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.05em;">News</p>
-    <div class="timeline">
-      <div class="tl-item"><span class="tl-badge">2023</span> Moved to <span class="tl-venue">CityU HK</span></div>
-      <div class="tl-item"><span class="tl-badge">2023</span> Paper accepted by <span class="tl-venue">IEEE IJCB</span></div>
-      <div class="tl-item"><span class="tl-badge">2023</span> Paper accepted by <span class="tl-venue">IEEE TPAMI</span></div>
-      <div class="tl-item"><span class="tl-badge">2023</span> Paper accepted by <span class="tl-venue">WACV</span></div>
-      <div class="tl-item"><span class="tl-badge">2023</span> Paper accepted by <span class="tl-venue">IEEE FG</span></div>
-      <div class="tl-item"><span class="tl-badge">2022</span> Paper accepted by <span class="tl-venue">CVPR</span></div>
-      <div class="tl-item"><span class="tl-badge">2021</span> Paper accepted by <span class="tl-venue">IEEE TBIOM</span></div>
-      <div class="tl-item"><span class="tl-badge">2021</span> Paper accepted by <span class="tl-venue">IEEE JSTSP</span></div>
+    <p class="s-section-label">About</p>
+    <div class="s-bio-section">
+      <p class="s-bio">I received my Ph.D. from <a href="https://www.jhu.edu/" target="_blank">Johns Hopkins University</a> in 2021, under the supervision of <a href="https://engineering.jhu.edu/ece/faculty/rama-chellappa/" target="_blank">Prof. Rama Chellappa</a>. I obtained my B.Sc. and M.Phil. from CUHK, and M.S. from the University of Maryland. I was a postdoctoral fellow at MINDS, JHU.</p>
     </div>
-  </div>
 
-  <!-- Links -->
-  <div class="card c-links fade">
-    <p style="font-size:13px;font-weight:600;color:var(--text3);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.05em;">Connect</p>
-    <div class="link-list">
-      <a href="mailto:cplau27@cityu.edu.hk" class="link-item">
+    <p class="s-section-label">Research</p>
+    <div class="s-interests">
+      <span class="s-tag">Image Restoration</span>
+      <span class="s-tag">Adversarial Robustness</span>
+      <span class="s-tag">Biometrics at Long Distances</span>
+      <span class="s-tag">Generative AI</span>
+    </div>
+
+    <p class="s-section-label">Connect</p>
+    <div class="s-links">
+      <a href="mailto:cplau27@cityu.edu.hk" class="s-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
         Email
       </a>
-      <a href="https://github.com/samuel930930" target="_blank" class="link-item">
+      <a href="https://github.com/samuel930930" target="_blank" class="s-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
-      <a href="https://scholar.google.com/citations?user=UYMV3qMAAAAJ&hl=en" target="_blank" class="link-item">
+      <a href="https://scholar.google.com/citations?user=UYMV3qMAAAAJ&hl=en" target="_blank" class="s-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-        Scholar
+        Google Scholar
       </a>
-      <a href="https://www.linkedin.com/in/chun-pong-lau-a08619136/" target="_blank" class="link-item">
+      <a href="https://www.linkedin.com/in/chun-pong-lau-a08619136/" target="_blank" class="s-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
-      <a href="Data/CV_Lau_Chun_Pong.pdf" target="_blank" class="link-item">
+      <a href="Data/CV_Lau_Chun_Pong.pdf" target="_blank" class="s-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         CV
       </a>
     </div>
-  </div>
 
-  <!-- Publications -->
-  <div style="grid-column:span 12;padding:8px 0 4px;">
-    <p style="font-size:13px;font-weight:600;color:var(--text3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.05em;">Selected Publications</p>
-  </div>
+    <div class="sidebar-spacer"></div>
 
-  <!-- Pub 1: CVPR 2022 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/sac_teaser.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-cvpr">CVPR 2022</span>
-        <h3 class="pub-title">Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks</h3>
-        <p class="pub-authors">Jiang Liu, Alexander Levine, <strong>Chun Pong Lau</strong>, Rama Chellappa, Soheil Feizi</p>
-        <div class="pub-actions">
-          <a href="https://arxiv.org/abs/2112.04532" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
-        </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{liu2022segment,
+    <button class="theme-toggle" id="themeToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      Toggle theme
+    </button>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- News -->
+    <section class="news-section fade-in">
+      <h2 class="section-heading">News</h2>
+      <div class="news-list">
+        <div class="news-item"><span class="news-year">2023</span><span>Moved to <span class="news-venue">CityU HK</span></span></div>
+        <div class="news-item"><span class="news-year">2023</span><span>Paper accepted by <span class="news-venue">IEEE IJCB</span></span></div>
+        <div class="news-item"><span class="news-year">2023</span><span>Paper accepted by <span class="news-venue">IEEE TPAMI</span></span></div>
+        <div class="news-item"><span class="news-year">2023</span><span>Paper accepted by <span class="news-venue">WACV</span></span></div>
+        <div class="news-item"><span class="news-year">2023</span><span>Paper accepted by <span class="news-venue">IEEE FG</span></span></div>
+        <div class="news-item"><span class="news-year">2022</span><span>Paper accepted by <span class="news-venue">CVPR</span></span></div>
+        <div class="news-item"><span class="news-year">2021</span><span>Paper accepted by <span class="news-venue">IEEE TBIOM</span></span></div>
+        <div class="news-item"><span class="news-year">2021</span><span>Paper accepted by <span class="news-venue">IEEE JSTSP</span></span></div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="pubs-section fade-in">
+      <h2 class="section-heading">Selected Publications</h2>
+
+      <!-- Pub 1: CVPR 2022 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/sac_teaser.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-cvpr">CVPR 2022</span>
+          <h3 class="pub-title-text">Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks</h3>
+          <p class="pub-authors-text">Jiang Liu, Alexander Levine, <strong>Chun Pong Lau</strong>, Rama Chellappa, Soheil Feizi</p>
+          <div class="pub-actions-row">
+            <a href="https://arxiv.org/abs/2112.04532" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{liu2022segment,
   title={Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks with Robust Patch Detection},
   author={Liu, Jiang and Levine, Alexander and Lau, Chun Pong and Chellappa, Rama and Feizi, Soheil},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
   year={2022}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 2: IEEE TBIOM 2021 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/ATFaceGAN_TBIOM_1.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-tbiom">IEEE TBIOM 2021</span>
-        <h3 class="pub-title">ATFaceGAN: Single Face Semantic Aware Image Restoration and Recognition from Atmospheric Turbulence</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Carlos Castillo, Rama Chellappa</p>
-        <div class="pub-actions">
-          <a href="https://ieeexplore.ieee.org/document/9351531" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@article{lau2021atfacegan,
+      </div>
+
+      <!-- Pub 2: IEEE TBIOM 2021 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/ATFaceGAN_TBIOM_1.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-tbiom">IEEE TBIOM 2021</span>
+          <h3 class="pub-title-text">ATFaceGAN: Single Face Semantic Aware Image Restoration and Recognition from Atmospheric Turbulence</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Carlos Castillo, Rama Chellappa</p>
+          <div class="pub-actions-row">
+            <a href="https://ieeexplore.ieee.org/document/9351531" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@article{lau2021atfacegan,
   title={ATFaceGAN: Single Face Semantic Aware Image Restoration and Recognition from Atmospheric Turbulence},
   author={Lau, Chun Pong and Castillo, Carlos and Chellappa, Rama},
   journal={IEEE Transactions on Biometrics, Behavior, and Identity Science},
   year={2021},
   publisher={IEEE}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 3: IEEE JSTSP 2021 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/00023_1.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-jstsp">IEEE JSTSP 2021</span>
-        <h3 class="pub-title">Semi-Supervised Landmark-Guided Restoration of Atmospheric Turbulent Images</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Amit Kumar, Rama Chellappa</p>
-        <div class="pub-actions">
-          <a href="https://ieeexplore.ieee.org/abstract/document/9320575" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@article{lau2021semi,
+      </div>
+
+      <!-- Pub 3: IEEE JSTSP 2021 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/00023_1.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-jstsp">IEEE JSTSP 2021</span>
+          <h3 class="pub-title-text">Semi-Supervised Landmark-Guided Restoration of Atmospheric Turbulent Images</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Amit Kumar, Rama Chellappa</p>
+          <div class="pub-actions-row">
+            <a href="https://ieeexplore.ieee.org/abstract/document/9320575" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@article{lau2021semi,
   title={Semi-Supervised Landmark-Guided Restoration of Atmospheric Turbulent Images},
   author={Lau, Chun Pong and Kumar, Amit and Chellappa, Rama},
   journal={IEEE Journal of Selected Topics in Signal Processing},
   year={2021},
   publisher={IEEE}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 4: NeurIPS 2020 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/DMAT.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-neurips">NeurIPS 2020</span>
-        <p class="pub-equal">* Equal contribution</p>
-        <h3 class="pub-title">Dual Manifold Adversarial Robustness: Defense against L<sub>p</sub> and non-L<sub>p</sub> Adversarial Attacks</h3>
-        <p class="pub-authors">Wei-An Lin*, <strong>Chun Pong Lau*</strong>, Alexander Levine, Rama Chellappa, Soheil Feizi</p>
-        <div class="pub-actions">
-          <a href="https://papers.nips.cc/paper/2020/file/23937b42f9273974570fb5a56a6652ee-Paper.pdf" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{lin2020dual,
+      </div>
+
+      <!-- Pub 4: NeurIPS 2020 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/DMAT.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-neurips">NeurIPS 2020</span>
+          <p class="pub-equal-note">* Equal contribution</p>
+          <h3 class="pub-title-text">Dual Manifold Adversarial Robustness: Defense against L<sub>p</sub> and non-L<sub>p</sub> Adversarial Attacks</h3>
+          <p class="pub-authors-text">Wei-An Lin*, <strong>Chun Pong Lau*</strong>, Alexander Levine, Rama Chellappa, Soheil Feizi</p>
+          <div class="pub-actions-row">
+            <a href="https://papers.nips.cc/paper/2020/file/23937b42f9273974570fb5a56a6652ee-Paper.pdf" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{lin2020dual,
   title={Dual Manifold Adversarial Robustness: Defense against Lp and non-Lp Adversarial Attacks},
   author={Lin, Wei-An and Lau, Chun Pong and Levine, Alexander and Chellappa, Rama and Feizi, Soheil},
   booktitle={Advances in Neural Information Processing Systems},
   year={2020}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 5: IEEE FG 2020 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/Rock.gif" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-fg">IEEE FG 2020</span>
-        <span class="pub-award">🏆 Oral + Honorable Mention</span>
-        <h3 class="pub-title">ATFaceGAN: Single Face Image Restoration and Recognition from Atmospheric Turbulence</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Hossein Souri, Rama Chellappa</p>
-        <div class="pub-actions">
-          <a href="https://www.computer.org/csdl/proceedings-article/fg/2020/307900a085/1kecHT7g7JK" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{lau2020atfacegan,
+      </div>
+
+      <!-- Pub 5: IEEE FG 2020 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/Rock.gif" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-fg">IEEE FG 2020</span>
+          <span class="pub-award-tag">Oral + Honorable Mention</span>
+          <h3 class="pub-title-text">ATFaceGAN: Single Face Image Restoration and Recognition from Atmospheric Turbulence</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Hossein Souri, Rama Chellappa</p>
+          <div class="pub-actions-row">
+            <a href="https://www.computer.org/csdl/proceedings-article/fg/2020/307900a085/1kecHT7g7JK" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@inproceedings{lau2020atfacegan,
   title={ATFaceGAN: Single Face Image Restoration and Recognition from Atmospheric Turbulence},
   author={Lau, Chun Pong and Souri, Hossein and Chellappa, Rama},
   booktitle={IEEE International Conference on Automatic Face and Gesture Recognition},
   year={2020},
   note={Oral + Honorable Mention Award}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 6: Inverse Problems 2019 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/chimney_1.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-ip">Inverse Problems 2019</span>
-        <h3 class="pub-title">Restoration of atmospheric turbulence-distorted images via RPCA and quasiconformal maps</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
-        <div class="pub-actions">
-          <a href="https://iopscience.iop.org/article/10.1088/1361-6420/ab0e4b/meta" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@article{lau2019restoration,
+      </div>
+
+      <!-- Pub 6: Inverse Problems 2019 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/chimney_1.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-ip">Inverse Problems 2019</span>
+          <h3 class="pub-title-text">Restoration of atmospheric turbulence-distorted images via RPCA and quasiconformal maps</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
+          <div class="pub-actions-row">
+            <a href="https://iopscience.iop.org/article/10.1088/1361-6420/ab0e4b/meta" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@article{lau2019restoration,
   title={Restoration of atmospheric turbulence-distorted images via RPCA and quasiconformal maps},
   author={Lau, Chun Pong and Lai, Yu Hin and Lui, Lok Ming},
   journal={Inverse Problems},
@@ -696,29 +674,27 @@
   year={2019},
   publisher={IOP Publishing}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 7: J. Scientific Computing 2019 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/IR_1.png" alt="" class="pub-img" loading="lazy">
-      <div>
-        <span class="pub-venue v-jsc">J. Sci. Comput. 2019</span>
-        <h3 class="pub-title">Variational models for joint subsampling and reconstruction of turbulence-degraded images</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
-        <div class="pub-actions">
-          <a href="https://link.springer.com/article/10.1007/s10915-018-0833-4" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@article{lau2019variational,
+      </div>
+
+      <!-- Pub 7: J. Scientific Computing 2019 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/IR_1.png" alt="" loading="lazy"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-jsc">J. Sci. Comput. 2019</span>
+          <h3 class="pub-title-text">Variational models for joint subsampling and reconstruction of turbulence-degraded images</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
+          <div class="pub-actions-row">
+            <a href="https://link.springer.com/article/10.1007/s10915-018-0833-4" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@article{lau2019variational,
   title={Variational models for joint subsampling and reconstruction of turbulence-degraded images},
   author={Lau, Chun Pong and Lai, Yu Hin and Lui, Lok Ming},
   journal={Journal of Scientific Computing},
@@ -728,29 +704,27 @@
   year={2019},
   publisher={Springer}
 }</pre></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pub 8: IEEE TIP 2018 -->
-  <div class="card c-pub fade">
-    <div class="pub-card">
-      <img src="Data/cplau_square_ap.jpeg" alt="" class="pub-img" loading="lazy" onerror="this.style.display='none'" style="background:var(--bg);display:flex;align-items:center;justify-content:center;">
-      <div>
-        <span class="pub-venue v-tip">IEEE TIP 2018</span>
-        <h3 class="pub-title">Image retargeting via Beltrami representation</h3>
-        <p class="pub-authors"><strong>Chun Pong Lau</strong>, Chun Pang Yung, Lok Ming Lui</p>
-        <div class="pub-actions">
-          <a href="https://ieeexplore.ieee.org/abstract/document/8418383" class="pub-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            PDF
-          </a>
-          <button class="pub-btn" onclick="toggleBibtex(this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            BibTeX
-          </button>
         </div>
-        <div class="bibtex-block"><pre class="bibtex-code">@article{lau2018image,
+      </div>
+
+      <!-- Pub 8: IEEE TIP 2018 -->
+      <div class="pub-item fade-in">
+        <div class="pub-img-wrap"><img src="Data/cplau_square_ap.jpeg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="pub-content">
+          <span class="pub-venue-tag v-tip">IEEE TIP 2018</span>
+          <h3 class="pub-title-text">Image retargeting via Beltrami representation</h3>
+          <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Chun Pang Yung, Lok Ming Lui</p>
+          <div class="pub-actions-row">
+            <a href="https://ieeexplore.ieee.org/abstract/document/8418383" class="pub-action-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+            <button class="pub-action-btn" onclick="toggleBibtex(this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              BibTeX
+            </button>
+          </div>
+          <div class="bibtex-block"><pre class="bibtex-code">@article{lau2018image,
   title={Image retargeting via Beltrami representation},
   author={Lau, Chun Pong and Yung, Chun Pang and Lui, Lok Ming},
   journal={IEEE Transactions on Image Processing},
@@ -760,45 +734,23 @@
   year={2018},
   publisher={IEEE}
 }</pre></div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="card c-footer fade">
-    <div class="footer-inner">
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
       <span class="footer-text">&copy; 2024 Samuel Chun Pong Lau. School of Data Science, City University of Hong Kong.</span>
       <div class="footer-links">
         <a href="mailto:cplau27@cityu.edu.hk">Email</a>
         <a href="https://github.com/samuel930930" target="_blank">GitHub</a>
         <a href="https://scholar.google.com/citations?user=UYMV3qMAAAAJ&hl=en" target="_blank">Scholar</a>
       </div>
-    </div>
-  </div>
+    </footer>
 
-</div><!-- end bento -->
-
-<!-- macOS-style Dock -->
-<div class="dock">
-  <a href="#top" class="dock-item" title="Home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-  </a>
-  <a href="#top" class="dock-item" title="About">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-  </a>
-  <a href="#top" class="dock-item" title="Publications">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-  </a>
-  <div class="dock-divider"></div>
-  <button class="dock-item" id="themeToggle" title="Toggle theme">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
+  </main>
 </div>
-
-<!-- Back to top -->
-<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
 
 <script>
   // Theme
@@ -812,23 +764,15 @@
     localStorage.setItem('theme', next);
   });
 
-  // Scroll progress
-  const progress = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
-    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    progress.style.width = pct + '%';
-    document.getElementById('btt').classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
-
   // Fade in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   // BibTeX toggle
   function toggleBibtex(btn) {
-    const block = btn.closest('.pub-card').querySelector('.bibtex-block');
+    const block = btn.closest('.pub-content').querySelector('.bibtex-block');
     block.classList.toggle('open');
     const svg = btn.querySelector('svg polyline');
     if (svg) svg.setAttribute('points', block.classList.contains('open') ? '6 15 12 9 18 9' : '6 9 12 15 18 9');

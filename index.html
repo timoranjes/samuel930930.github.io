@@ -276,6 +276,8 @@
       letter-spacing: -0.03em;
       margin-bottom: 8px;
       color: var(--text-primary);
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .hero-chinese-name {
@@ -299,6 +301,8 @@
       line-height: 1.8;
       margin-bottom: 24px;
       max-width: 600px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .hero-interests {
@@ -421,6 +425,8 @@
       border-radius: 12px;
       background: var(--bg-secondary);
       transition: all 0.2s ease;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     .news-item:hover {
       background: var(--bg-card-hover);
@@ -457,7 +463,7 @@
 
     .pub-card {
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 220px minmax(0, 1fr);
       gap: 28px;
       padding: 28px;
       border-radius: 16px;
@@ -465,6 +471,7 @@
       border: 1px solid var(--border-color);
       transition: all 0.25s ease;
       position: relative;
+      overflow: hidden;
     }
     .pub-card:hover {
       border-color: var(--border-hover);
@@ -506,6 +513,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      min-width: 0;
     }
 
     .pub-venue-badge {
@@ -518,8 +526,10 @@
       border-radius: 20px;
       color: var(--badge-text);
       width: fit-content;
+      max-width: 100%;
       margin-bottom: 10px;
       letter-spacing: 0.02em;
+      flex-shrink: 0;
     }
 
     .badge-cvpr { background: #dc2626; }
@@ -538,6 +548,8 @@
       color: var(--text-primary);
       line-height: 1.45;
       margin-bottom: 8px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .pub-authors {
@@ -545,6 +557,8 @@
       color: var(--text-tertiary);
       line-height: 1.5;
       margin-bottom: 12px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     .pub-authors strong {
       color: var(--accent);
@@ -576,6 +590,8 @@
       align-items: center;
       gap: 12px;
       margin-top: auto;
+      flex-wrap: wrap;
+      min-width: 0;
     }
 
     .pub-link {
@@ -634,6 +650,7 @@
       overflow: hidden;
       transition: max-height 0.35s ease, margin 0.35s ease, padding 0.35s ease;
       margin-top: 0;
+      min-width: 0;
     }
     .bibtex-content.open {
       max-height: 400px;
@@ -648,7 +665,8 @@
       border-radius: 10px;
       background: var(--bg-code);
       color: var(--text-secondary);
-      white-space: pre;
+      white-space: pre-wrap;
+      word-break: break-word;
       overflow-x: auto;
       border: 1px solid var(--border-color);
     }
@@ -748,6 +766,9 @@
     }
 
     @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
       .navbar-links {
         display: none;
         position: absolute;
@@ -889,11 +910,11 @@
         </li>
         <li class="news-item fade-in">
           <span class="news-bullet"></span>
-          <span><span class="news-badge">2022</span> One paper accepted by <strong>WACV 2023</strong></span>
+          <span><span class="news-badge">2023</span> One paper accepted by <strong>WACV 2023</strong></span>
         </li>
         <li class="news-item fade-in">
           <span class="news-bullet"></span>
-          <span><span class="news-badge">2022</span> One paper accepted by <strong>FG 2023</strong></span>
+          <span><span class="news-badge">2023</span> One paper accepted by <strong>FG 2023</strong></span>
         </li>
         <li class="news-item fade-in">
           <span class="news-bullet"></span>

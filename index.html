@@ -7,86 +7,147 @@
   <meta name="description" content="Assistant Professor, School of Data Science, City University of Hong Kong">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>/* /* mobile-toggle-fix-20260501231141 */ */
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
     :root {
-      --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+      --serif: 'Newsreader', Georgia, serif;
       --sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --bg: #fcfbf9;
-      --surface: #f3f1ec;
+      --mono: 'JetBrains Mono', monospace;
+
+      /* Warm academic palette */
+      --bg: #fefdfb;
+      --surface: #f7f5f0;
+      --surface-hover: #f0ece4;
       --card: #ffffff;
-      --text: #1a1a1a;
-      --text2: #4a4a4a;
-      --text3: #7a7a7a;
-      --accent: #9b2226;
-      --accent-light: rgba(155,34,38,0.08);
-      --border: rgba(0,0,0,0.1);
-      --border-light: rgba(0,0,0,0.05);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
-      --max: 1080px;
-      --sidebar: 320px;
+      --text: #1a1916;
+      --text2: #5c5953;
+      --text3: #8a8680;
+      --text4: #b5b0a8;
+
+      /* Accent: deep burgundy */
+      --accent: #8b1a1e;
+      --accent-hover: #6d1417;
+      --accent-light: rgba(139,26,30,0.06);
+      --accent-mid: rgba(139,26,30,0.12);
+
+      /* Borders */
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+
+      /* Shadows — warm-tinted */
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.03), 0 0.5px 1px rgba(0,0,0,0.02);
+      --shadow-md: 0 2px 6px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-card: 0 4px 20px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02);
+      --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.03);
+
+      --max: 1120px;
+      --sidebar: 340px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
     }
+
     [data-theme="dark"] {
-      --bg: #111110;
-      --surface: #1a1918;
-      --card: #1f1e1c;
-      --text: #e8e6e1;
-      --text2: #a8a6a1;
-      --text3: #6a6862;
+      --bg: #0f0e0c;
+      --surface: #1a1916;
+      --surface-hover: #222018;
+      --card: #1e1d19;
+      --text: #e8e5df;
+      --text2: #a8a49d;
+      --text3: #6a6660;
+      --text4: #3d3a36;
       --accent: #d4757a;
-      --accent-light: rgba(212,117,122,0.1);
-      --border: rgba(255,255,255,0.1);
-      --border-light: rgba(255,255,255,0.05);
+      --accent-hover: #e08a8f;
+      --accent-light: rgba(212,117,122,0.08);
+      --accent-mid: rgba(212,117,122,0.15);
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-      --shadow-md: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 2px 6px rgba(0,0,0,0.3);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.4);
+      --shadow-card: 0 4px 20px rgba(0,0,0,0.3);
+      --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.4);
     }
+
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      font-feature-settings: "liga";
+      font-feature-settings: "liga" 1, "rlig" 1;
     }
+
     ::selection { background: var(--accent); color: #fff; }
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--text); }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { color: var(--accent-hover); }
     img { max-width: 100%; display: block; }
 
-    /* Layout */
+    /* ========== BACKGROUND PATTERN ========== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--border) 0.5px, transparent 0.5px);
+      background-size: 24px 24px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, var(--bg) 120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========== LAYOUT ========== */
     .layout {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: var(--sidebar) 1fr;
       max-width: var(--max);
       margin: 0 auto;
       min-height: 100vh;
-      gap: 0;
     }
 
-    /* Sidebar */
+    /* ========== SIDEBAR ========== */
     .sidebar {
       position: sticky;
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      padding: 48px 32px;
-      border-right: 1px solid var(--border-light);
+      padding: 56px 36px 40px;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
+      background: var(--bg);
     }
     .sidebar::-webkit-scrollbar { width: 0; }
 
+    /* Photo */
     .photo-container {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       overflow: hidden;
       margin-bottom: 24px;
-      border: 2px solid var(--border);
+      border: 2.5px solid var(--surface);
+      box-shadow: var(--shadow-md), 0 0 0 1px var(--border);
       flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-container:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-strong);
     }
     .photo-container img {
       width: 100%;
@@ -94,45 +155,53 @@
       object-fit: cover;
     }
 
+    /* Name & Title */
     .s-name {
       font-family: var(--serif);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       margin-bottom: 2px;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
+      color: var(--text);
     }
     .s-chinese {
       font-size: 14px;
       color: var(--text3);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      font-weight: 400;
     }
     .s-title {
       font-size: 13px;
       color: var(--accent);
       font-weight: 500;
-      line-height: 1.5;
-      margin-bottom: 20px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
 
+    /* Section labels */
     .s-section-label {
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text3);
       margin-bottom: 10px;
-      margin-top: 24px;
+      margin-top: 28px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
     }
-    .s-section-label:first-of-type { margin-top: 0; }
 
+    /* Bio */
     .s-bio {
       font-size: 13px;
       color: var(--text2);
-      line-height: 1.7;
+      line-height: 1.75;
     }
-    .s-bio a { color: var(--accent); }
+    .s-bio a { color: var(--accent); font-weight: 500; }
+    .s-bio a:hover { color: var(--accent-hover); }
 
+    /* Interest tags */
     .s-interests {
       display: flex;
       flex-wrap: wrap;
@@ -142,33 +211,45 @@
       font-size: 11px;
       font-weight: 500;
       padding: 4px 10px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       background: var(--accent-light);
       color: var(--accent);
       letter-spacing: 0.01em;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .s-tag:hover {
+      background: var(--accent-mid);
     }
 
+    /* Links */
     .s-links {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
     .s-link {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-size: 13px;
       color: var(--text2);
-      transition: color 0.2s;
+      transition: all 0.2s ease;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+      margin: 0 -8px;
     }
-    .s-link:hover { color: var(--accent); }
-    .s-link svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.5; }
+    .s-link:hover {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+    .s-link svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.45; transition: opacity 0.2s ease; }
     .s-link:hover svg { opacity: 1; }
 
     .sidebar-spacer { flex: 1; }
 
+    /* Theme toggle */
     .theme-toggle {
-      margin-top: 20px;
+      margin-top: 24px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -177,9 +258,9 @@
       cursor: pointer;
       background: none;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 12px;
-      transition: all 0.2s;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      transition: all 0.2s ease;
       font-family: var(--sans);
       width: fit-content;
     }
@@ -188,6 +269,8 @@
       color: var(--accent);
       border-color: var(--accent);
     }
+    .theme-toggle svg { width: 14px; height: 14px; }
+
     .theme-toggle-mobile {
       display: none;
       position: fixed;
@@ -200,10 +283,10 @@
       background: var(--card);
       color: var(--text2);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow-lg);
       z-index: 100;
     }
     .theme-toggle-mobile:hover {
@@ -211,188 +294,262 @@
       color: #fff;
       border-color: var(--accent);
     }
-    .theme-toggle-mobile svg {
-      width: 20px;
-      height: 20px;
-    }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .theme-toggle svg { width: 14px; height: 14px; }
+    .theme-toggle-mobile svg { width: 18px; height: 18px; }
 
-    /* Main */
+    /* ========== MAIN ========== */
     .main {
-      padding: 48px 48px 80px;
+      padding: 56px 52px 100px;
     }
 
-    /* News */
-    .news-section {
-      margin-bottom: 56px;
+    /* ========== HERO SECTION ========== */
+    .hero-intro {
+      margin-bottom: 64px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
     }
+    .hero-intro h1 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .hero-intro p {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .hero-intro .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ========== SECTION HEADINGS ========== */
     .section-heading {
       font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--text);
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      margin-bottom: 32px;
+      color: var(--text);
       display: flex;
       align-items: baseline;
-      gap: 12px;
+      gap: 14px;
     }
-    [data-theme="dark"] .section-heading { border-bottom-color: var(--text3); }
+    .section-heading::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 24px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
 
+    /* ========== NEWS ========== */
+    .news-section {
+      margin-bottom: 72px;
+    }
     .news-list {
       display: flex;
       flex-direction: column;
+      gap: 0;
     }
     .news-item {
       display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-light);
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
       font-size: 14px;
       color: var(--text2);
-      line-height: 1.5;
+      line-height: 1.55;
+      align-items: baseline;
     }
     .news-item:last-child { border-bottom: none; }
+    .news-item:first-child {
+      padding-top: 0;
+    }
     .news-year {
       font-family: var(--serif);
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 500;
       color: var(--text3);
       font-style: italic;
+      padding-top: 2px;
     }
-    .news-venue { font-weight: 600; color: var(--text); }
+    .news-item:first-child .news-year { color: var(--accent); font-style: normal; font-weight: 600; }
+    .news-venue {
+      font-weight: 600;
+      color: var(--text);
+    }
 
-    /* Publications */
-    .pubs-section { margin-bottom: 56px; }
-
+    /* ========== PUBLICATIONS ========== */
+    .pubs-section {
+      margin-bottom: 72px;
+    }
     .pub-item {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border-light);
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
       align-items: start;
+      transition: background-color 0.2s ease;
     }
     .pub-item:last-child { border-bottom: none; }
+    .pub-item:first-child { padding-top: 0; }
 
     .pub-img-wrap {
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       overflow: hidden;
       background: var(--surface);
       aspect-ratio: 4/3;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .pub-item:hover .pub-img-wrap {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
     .pub-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .pub-item:hover .pub-img-wrap img {
+      transform: scale(1.03);
     }
 
     .pub-content {}
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
     .pub-venue-tag {
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 3px;
+      padding: 3px 9px;
+      border-radius: 4px;
       color: #fff;
       display: inline-block;
-      margin-bottom: 6px;
       font-family: var(--sans);
+      transition: filter 0.2s ease;
     }
+    .pub-venue-tag:hover { filter: brightness(1.1); }
+
     .pub-award-tag {
       font-size: 10px;
       font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 3px;
-      background: #fbbf24;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
       color: #78350f;
       display: inline-block;
-      margin-bottom: 6px;
-      margin-left: 4px;
+      margin-left: 2px;
+      box-shadow: 0 1px 3px rgba(251,191,36,0.3);
     }
+
     .pub-equal-note {
       font-size: 11px;
       color: var(--text3);
       font-style: italic;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
+
     .pub-title-text {
       font-family: var(--serif);
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 500;
       line-height: 1.35;
-      letter-spacing: -0.2px;
-      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
       color: var(--text);
+      transition: color 0.2s ease;
     }
+
     .pub-authors-text {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text3);
-      line-height: 1.5;
-      margin-bottom: 10px;
+      line-height: 1.55;
+      margin-bottom: 12px;
     }
     .pub-authors-text strong { color: var(--accent); font-weight: 600; }
+
     .pub-actions-row {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
+
     .pub-action-btn {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: var(--surface);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--card);
       color: var(--text2);
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       font-family: var(--sans);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
+      text-decoration: none;
     }
-    .pub-action-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .pub-action-btn svg { width: 12px; height: 12px; }
+    .pub-action-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+    .pub-action-btn svg { width: 13px; height: 13px; }
 
     .bibtex-block {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease, margin 0.3s ease;
+      transition: max-height 0.35s ease, margin 0.35s ease;
     }
-    .bibtex-block.open { max-height: 300px; margin-top: 12px; }
+    .bibtex-block.open { max-height: 350px; margin-top: 14px; }
     .bibtex-code {
-      font-family: 'SFMono-Regular', Consolas, monospace;
-      font-size: 11px;
+      font-family: var(--mono);
+      font-size: 12px;
       line-height: 1.6;
-      padding: 12px 14px;
-      border-radius: 4px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
       background: var(--surface);
       color: var(--text3);
       white-space: pre-wrap;
       word-break: break-word;
       overflow-x: auto;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
     }
 
     /* Venue colors */
-    .v-cvpr { background: #ff5b4f; }
-    .v-neurips { background: #7928ca; }
-    .v-tbiom { background: #0a72ef; }
-    .v-jstsp { background: #16a34a; }
-    .v-fg { background: #ea580c; }
-    .v-ip { background: #6b7280; }
-    .v-jsc { background: #0891b2; }
-    .v-tip { background: #7c3aed; }
+    .v-cvpr { background: linear-gradient(135deg, #ff5b4f, #e03e2e); }
+    .v-neurips { background: linear-gradient(135deg, #7928ca, #5a1e9e); }
+    .v-tbiom { background: linear-gradient(135deg, #0a72ef, #0558c4); }
+    .v-jstsp { background: linear-gradient(135deg, #16a34a, #11823b); }
+    .v-fg { background: linear-gradient(135deg, #ea580c, #c74a0a); }
+    .v-ip { background: linear-gradient(135deg, #6b7280, #555d66); }
+    .v-jsc { background: linear-gradient(135deg, #0891b2, #06728e); }
+    .v-tip { background: linear-gradient(135deg, #7c3aed, #5d27c4); }
 
-    /* Footer */
+    /* ========== FOOTER ========== */
     .footer {
       padding: 32px 0 0;
-      border-top: 1px solid var(--border-light);
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -400,22 +557,60 @@
       gap: 12px;
     }
     .footer-text { font-size: 12px; color: var(--text3); }
-    .footer-links { display: flex; gap: 16px; }
-    .footer-links a { font-size: 12px; color: var(--text3); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--text3); transition: color 0.2s ease; }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Animations */
+    /* ========== ANIMATIONS ========== */
     .fade-in {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Responsive */
+    /* Stagger children */
+    .news-section .news-item {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .news-section.animated .news-item {
+      animation: fadeSlideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .news-section.animated .news-item:nth-child(1) { animation-delay: 0s; }
+    .news-section.animated .news-item:nth-child(2) { animation-delay: 0.05s; }
+    .news-section.animated .news-item:nth-child(3) { animation-delay: 0.1s; }
+    .news-section.animated .news-item:nth-child(4) { animation-delay: 0.15s; }
+    .news-section.animated .news-item:nth-child(5) { animation-delay: 0.2s; }
+    .news-section.animated .news-item:nth-child(6) { animation-delay: 0.25s; }
+    .news-section.animated .news-item:nth-child(7) { animation-delay: 0.3s; }
+    .news-section.animated .news-item:nth-child(8) { animation-delay: 0.35s; }
+
+    .pubs-section .pub-item {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .pubs-section.animated .pub-item {
+      animation: fadeSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .pubs-section.animated .pub-item:nth-child(1) { animation-delay: 0s; }
+    .pubs-section.animated .pub-item:nth-child(2) { animation-delay: 0.07s; }
+    .pubs-section.animated .pub-item:nth-child(3) { animation-delay: 0.14s; }
+    .pubs-section.animated .pub-item:nth-child(4) { animation-delay: 0.21s; }
+    .pubs-section.animated .pub-item:nth-child(5) { animation-delay: 0.28s; }
+    .pubs-section.animated .pub-item:nth-child(6) { animation-delay: 0.35s; }
+    .pubs-section.animated .pub-item:nth-child(7) { animation-delay: 0.42s; }
+    .pubs-section.animated .pub-item:nth-child(8) { animation-delay: 0.49s; }
+
+    @keyframes fadeSlideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 860px) {
       .theme-toggle-mobile { display: flex !important; }
       .theme-toggle { display: none !important; }
@@ -424,43 +619,39 @@
         position: relative;
         height: auto;
         border-right: none;
-        border-bottom: 1px solid var(--border-light);
-        padding: 32px 24px;
+        border-bottom: 1px solid var(--border);
+        padding: 36px 28px;
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
         gap: 16px;
       }
-      .photo-container { width: 80px; height: 80px; margin-bottom: 0; }
+      .photo-container { width: 72px; height: 72px; margin-bottom: 0; }
       .sidebar-spacer { display: none; }
-      .s-section-label { margin-top: 12px; width: 100%; }
+      .s-section-label { margin-top: 14px; width: 100%; }
       .s-bio-section { width: 100%; }
       .theme-toggle { margin-top: 12px; }
-      .main { padding: 32px 24px 64px; }
-      .pub-item { grid-template-columns: 100px 1fr; gap: 16px; }
+      .main { padding: 40px 28px 72px; }
+      .pub-item { grid-template-columns: 120px 1fr; gap: 18px; }
       .section-heading { font-size: 22px; }
-      .hero-title { font-size: 28px; letter-spacing: -0.96px; }
+      .hero-intro h1 { font-size: 26px; }
     }
     @media (max-width: 560px) {
       .sidebar { padding: 24px 16px; }
-      .main { padding: 24px 16px 48px; }
+      .main { padding: 28px 16px 56px; }
       .pub-item { grid-template-columns: 1fr; }
-      .pub-img-wrap { max-width: 200px; }
-      .news-item { grid-template-columns: 40px 1fr; gap: 10px; }
-      .hero-title { font-size: 24px; letter-spacing: -0.72px; }
+      .pub-img-wrap { max-width: 220px; }
+      .news-item { grid-template-columns: 44px 1fr; gap: 12px; }
+      .hero-intro h1 { font-size: 22px; }
       .section-heading { font-size: 20px; }
-      .tag { padding: 5px 12px; font-size: 12px; }
-      .action-btn { min-height: 44px; min-width: 44px; }
     }
     @media (max-width: 400px) {
       .sidebar { padding: 20px 12px; }
       .main { padding: 20px 12px 40px; }
-      .hero-title { font-size: 20px; letter-spacing: -0.5px; }
+      .hero-intro h1 { font-size: 20px; }
       .section-heading { font-size: 18px; }
-      .pub-title-text { font-size: 15px; }
+      .pub-title-text { font-size: 16px; }
       .pub-authors-text { font-size: 12px; }
-      .pub-action-btn { font-size: 11px; padding: 8px 12px; }
-      .news-item { font-size: 13px; }
     }
   </style>
 </head>
@@ -471,7 +662,7 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="photo-container">
-      <img src="Data/cplau_square_ap.jpeg" alt="Samuel Chun Pong Lau" onerror="this.src='https://ui-avatars.com/api/?name=SCL&size=240&background=9b2226&color=fff&font-size=0.4'">
+      <img src="Data/cplau_square_ap.jpeg" alt="Samuel Chun Pong Lau" onerror="this.src='https://ui-avatars.com/api/?name=SCL&size=240&background=8b1a1e&color=fff&font-size=0.4'">
     </div>
     <div>
       <h1 class="s-name">Samuel Chun Pong Lau</h1>
@@ -530,8 +721,14 @@
   <!-- Main content -->
   <main class="main">
 
+    <!-- Hero intro -->
+    <section class="hero-intro fade-in">
+      <h1>Research in computer vision,<br>image restoration &amp; robustness</h1>
+      <p>Assistant Professor at <span class="highlight">CityU HK</span>. Working on atmospheric turbulence restoration, adversarial robustness, and biometrics. Ph.D. from <span class="highlight">Johns Hopkins</span>.</p>
+    </section>
+
     <!-- News -->
-    <section class="news-section fade-in">
+    <section class="news-section">
       <h2 class="section-heading">News</h2>
       <div class="news-list">
         <div class="news-item"><span class="news-year">2023</span><span>Moved to <span class="news-venue">CityU HK</span></span></div>
@@ -546,14 +743,16 @@
     </section>
 
     <!-- Publications -->
-    <section class="pubs-section fade-in">
+    <section class="pubs-section">
       <h2 class="section-heading">Selected Publications</h2>
 
       <!-- Pub 1: CVPR 2022 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/sac_teaser.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-cvpr">CVPR 2022</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-cvpr">CVPR 2022</span>
+          </div>
           <h3 class="pub-title-text">Segment and Complete: Defending Object Detectors against Adversarial Patch Attacks</h3>
           <p class="pub-authors-text">Jiang Liu, Alexander Levine, <strong>Chun Pong Lau</strong>, Rama Chellappa, Soheil Feizi</p>
           <div class="pub-actions-row">
@@ -576,10 +775,12 @@
       </div>
 
       <!-- Pub 2: IEEE TBIOM 2021 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/ATFaceGAN_TBIOM_1.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-tbiom">IEEE TBIOM 2021</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-tbiom">IEEE TBIOM 2021</span>
+          </div>
           <h3 class="pub-title-text">ATFaceGAN: Single Face Semantic Aware Image Restoration and Recognition from Atmospheric Turbulence</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Carlos Castillo, Rama Chellappa</p>
           <div class="pub-actions-row">
@@ -603,10 +804,12 @@
       </div>
 
       <!-- Pub 3: IEEE JSTSP 2021 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/00023_1.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-jstsp">IEEE JSTSP 2021</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-jstsp">IEEE JSTSP 2021</span>
+          </div>
           <h3 class="pub-title-text">Semi-Supervised Landmark-Guided Restoration of Atmospheric Turbulent Images</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Amit Kumar, Rama Chellappa</p>
           <div class="pub-actions-row">
@@ -630,10 +833,12 @@
       </div>
 
       <!-- Pub 4: NeurIPS 2020 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/DMAT.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-neurips">NeurIPS 2020</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-neurips">NeurIPS 2020</span>
+          </div>
           <p class="pub-equal-note">* Equal contribution</p>
           <h3 class="pub-title-text">Dual Manifold Adversarial Robustness: Defense against L<sub>p</sub> and non-L<sub>p</sub> Adversarial Attacks</h3>
           <p class="pub-authors-text">Wei-An Lin*, <strong>Chun Pong Lau*</strong>, Alexander Levine, Rama Chellappa, Soheil Feizi</p>
@@ -657,11 +862,13 @@
       </div>
 
       <!-- Pub 5: IEEE FG 2020 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/Rock.gif" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-fg">IEEE FG 2020</span>
-          <span class="pub-award-tag">Oral + Honorable Mention</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-fg">IEEE FG 2020</span>
+            <span class="pub-award-tag">🏆 Oral + Honorable Mention</span>
+          </div>
           <h3 class="pub-title-text">ATFaceGAN: Single Face Image Restoration and Recognition from Atmospheric Turbulence</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Hossein Souri, Rama Chellappa</p>
           <div class="pub-actions-row">
@@ -685,10 +892,12 @@
       </div>
 
       <!-- Pub 6: Inverse Problems 2019 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/chimney_1.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-ip">Inverse Problems 2019</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-ip">Inverse Problems 2019</span>
+          </div>
           <h3 class="pub-title-text">Restoration of atmospheric turbulence-distorted images via RPCA and quasiconformal maps</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
           <div class="pub-actions-row">
@@ -715,10 +924,12 @@
       </div>
 
       <!-- Pub 7: J. Scientific Computing 2019 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/IR_1.png" alt="" loading="lazy"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-jsc">J. Sci. Comput. 2019</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-jsc">J. Sci. Comput. 2019</span>
+          </div>
           <h3 class="pub-title-text">Variational models for joint subsampling and reconstruction of turbulence-degraded images</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Yu Hin Lai, Lok Ming Lui</p>
           <div class="pub-actions-row">
@@ -745,10 +956,12 @@
       </div>
 
       <!-- Pub 8: IEEE TIP 2018 -->
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <div class="pub-img-wrap"><img src="Data/cplau_square_ap.jpeg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
         <div class="pub-content">
-          <span class="pub-venue-tag v-tip">IEEE TIP 2018</span>
+          <div class="pub-meta">
+            <span class="pub-venue-tag v-tip">IEEE TIP 2018</span>
+          </div>
           <h3 class="pub-title-text">Image retargeting via Beltrami representation</h3>
           <p class="pub-authors-text"><strong>Chun Pong Lau</strong>, Chun Pang Yung, Lok Ming Lui</p>
           <div class="pub-actions-row">
@@ -808,11 +1021,23 @@
     setTheme(next);
   });
 
-  // Fade in
+  // Animations with stagger
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        if (e.target.classList.contains('hero-intro')) {
+          e.target.classList.add('visible');
+        } else if (e.target.classList.contains('news-section')) {
+          e.target.classList.add('animated');
+        } else if (e.target.classList.contains('pubs-section')) {
+          e.target.classList.add('animated');
+        }
+        observer.unobserve(e.target);
+      }
+    });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.hero-intro, .news-section, .pubs-section').forEach(el => observer.observe(el));
 
   // BibTeX toggle
   function toggleBibtex(btn) {
